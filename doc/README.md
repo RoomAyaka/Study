@@ -7,5 +7,5 @@ study
 │   └── README.md
 └── src
     └── Laravel
-        └── blog  # PHPフレームワーク Laravel入門 第2版　サンプル　by Naoki
+        └── blog  # PHPフレームワーク Laravel入門 第2版 サンプルby Naoki
 
