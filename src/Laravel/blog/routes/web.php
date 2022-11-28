@@ -31,6 +31,8 @@ Route::get('hello/edit','App\Http\Controllers\HelloController@edit');
 Route::post('hello/edit','App\Http\Controllers\HelloController@update');
 Route::get('hello/del','App\Http\Controllers\HelloController@del');
 Route::post('hello/del','App\Http\Controllers\HelloController@remove');
+Route::get('upload','App\Http\Controllers\HelloController@upload');
+Route::post('upload','App\Http\Controllers\HelloController@upload');
 
 
 

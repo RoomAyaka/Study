@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\HelloRequest;
 use Validator;
 
+use Illuminate\Support\Facades\Log;
+use App\Models\Image;
+use App\Models\News;
+
 global $head, $style, $body, $end;
 $head = '<html><head>';
 $style = <<<EOR
@@ -28,10 +32,29 @@ class HelloController extends Controller
 {
     public function index(Request $request)
     {
-        $items = DB::select('select * from people');
-        return view('index', ['items' => $items]);
+        $image = DB::select('select * from news');
+        $items = DB::select('select * from news');
+        return view('index', ['items' => $items, 'image' => $image]);
     }
+    public function upload(Request $request)
+    {
+        // ディレクトリ名
+        $dir = 'sample';
 
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+
+        // 取得したファイル名で保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name);
+
+        // ファイル情報をDBに保存
+        $image = new Image();
+        $image->name = $file_name;
+        $image->path = 'storage/' . $dir . '/' . $file_name;
+        $image->save();
+
+        return redirect('/hello');
+    }
     public function post(Request $request)
     {
         $items = DB::select('select * from people');
@@ -45,13 +68,32 @@ class HelloController extends Controller
 
     public function create(Request $request)
     {
-        $param = [
-            'name' => $request->name,
-            'mail' => $request->mail,
-            'age' => $request->age,
-        ];
-        DB::insert('INSERT INTO people (name,mail,age) VALUES (:name,:mail,:age)',$param);
-        return redirect('/hello');
+        // ディレクトリ名
+        $dir = 'sample';
+
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+
+        // 取得したファイル名で保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name);
+
+        // ファイル情報をDBに保存
+        $image = new News();
+        $image->title = $request->title;
+        $image->message = $request->message;
+        $image->image_name = $file_name;
+        $image->image_path = 'storage/' . $dir . '/' . $file_name;
+        $image->save();
+
+        // $param = [
+        //     'title' => $request->title,
+        //     'image_path' => $request->image_path,
+        //     'image_name' => $request->image_name,
+        //     'message' => $request->message,
+        // ];
+        // DB::insert('INSERT INTO news (title,image_path,image_name,message) VALUES (:title,:image_path,:image_name,:message)',$param);
+        $items = DB::select('select * from news');
+        return redirect('/hello', ['items' => $items]);
     }
 
 
