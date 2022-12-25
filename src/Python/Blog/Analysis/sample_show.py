@@ -1,4 +1,4 @@
-import matplotlib.pyplot as pltpip
+import matplotlib.pyplot as plt
 
 # グラフとして描画するデータ
 x = [1,2,3,4]
