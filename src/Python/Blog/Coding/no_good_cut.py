@@ -5,8 +5,6 @@ data = {
     "大阪の気温(2020年)": [8.6, 8.0, 11.4, 13.7,20.8, 24.9, 26.0, 30.7, 25.8, 18.7, 14.7, 8.7]
 }
 df = pd.DataFrame(data)
-# 全てのデータを出力する
-print(df.mean())
-# 個別のデータを出力する
-print("東京の気温(2020年) =", df["東京の気温(2020年)"].mean())
-print("大阪の気温(2020年) =", df["大阪の気温(2020年)"].mean())
+bins = [0, 5, 10, 15, 20, 25, 30]
+cut = pd.cut(df["東京の気温(2020年)"], bins=bins, right=False)
+print(cut.value_counts(sort=False))

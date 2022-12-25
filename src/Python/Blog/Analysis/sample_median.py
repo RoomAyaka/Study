@@ -6,7 +6,7 @@ data = {
 }
 df = pd.DataFrame(data)
 # 全てのデータを出力する
-print(df.mean())
+print(df.median())
 # 個別のデータを出力する
-print("東京の気温(2020年) =", df["東京の気温(2020年)"].mean())
-print("大阪の気温(2020年) =", df["大阪の気温(2020年)"].mean())
+print("東京の気温(2020年) =", df["東京の気温(2020年)"].median())
+print("大阪の気温(2020年) =", df["大阪の気温(2020年)"].median())
