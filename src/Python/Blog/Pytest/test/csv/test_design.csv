@@ -1,0 +1,6 @@
+No,action,x,y,expected_value,note
+1,add,6,3,9,加算
+2,sub,6,3,3,減算
+3,mul,6,3,18,掛け算
+4,div,6,3,2,割り算
+5,test,6,3,四則演算以外の操作です,例外処理
