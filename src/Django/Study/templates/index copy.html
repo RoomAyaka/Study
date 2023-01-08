@@ -1,0 +1,6 @@
+
+
+{% for article in object_list %}
+<li><a href="{% url 'article' article.pk %}">{{ article.title }}</a> </li>
+{% endfor %}
+

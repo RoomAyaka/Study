@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}タイトル{% endblock %}</title>
+</head>
+<body>
+    <!-- {% include 'header.html' %} -->
+    <!-- block content/endblock: 継承した内容を下記に表示する -->
+    {% block content %}{% endblock %}
+    <!-- {% include 'footer.html' %} -->
+</body>
+</html>

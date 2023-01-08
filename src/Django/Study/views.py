@@ -1,18 +1,35 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
-# Create your views here.
+from .models import Article
+from .forms import ArticleForm
+from django.views.generic import ListView
+from django.views.generic import DetailView
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-def page(request, page_id):
-    msg = f'ページ{page_id}'
-    return HttpResponse(msg)
+class IndexView(ListView):
+    # template_name: レンダリングするテンプレートを指定
+    # model: 使用するモデルクラス名を指定
+    model = Article
+    template_name = 'index.html'
+
+    def get_queryset(self):
+        # 最新の記事を5件取得する
+        return Article.objects.order_by('-created_at')[:5]
 
 
-def index(request):
-    template = loader.get_template('index.html')
-    context = {
-        "title": "Django",
-        'message': 'index.htmlの表示'
-    }
-    return HttpResponse(template.render(context, request))
+class ArticleView(DetailView):
+    # template_name: レンダリングするテンプレートを指定
+    # model: 使用するモデルクラス名を指定
+    model = Article
+    template_name = 'article.html'
+
+
+class Newview(LoginRequiredMixin, CreateView):
+    # form_class: 定義したフォームのクラスを指定
+    form_class = ArticleForm
+    template_name = 'form.html'
+    # success_url: 処理が完了後にURL先
+    success_url = "/"
+    # login_url: 未ログインユーザーに対して遷移するURL先
+    login_url = "/admin/"
+

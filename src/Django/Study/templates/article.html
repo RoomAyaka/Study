@@ -1,0 +1,8 @@
+<article>
+    <h2>{{ article.title }}</h2>
+    <small>{{ article.created_at | date:'Y年n月j日' }}</small>
+    <!-- linebreaks: プレーンテキストの改行を適切な HTML タグに変換します。
+    改行 1 つは改行タグ (<br />) に、改行およびそれに続く空行は段落タグ (</p>) に変換されます。 -->
+    {{ article.message | linebreaks }}
+    <p><a href="/">トップページ</a></p>
+</article>

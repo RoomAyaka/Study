@@ -1,5 +1,13 @@
-
-{% include 'header.html' %}
-<h2>{{title}}</h2>
-<p>{{message}}</p>
-{% include 'footer.html' %}
+<!-- 継承元を選択する -->
+{% extends 'base.html' %}
+<!-- そのページのタイトルを設定する -->
+{% block title %}トップページ{% endblock %}
+<!-- block content: 内容の先頭に配置する -->
+{% block content %}
+<ul>
+    {% for article in object_list %}
+    <li>{{ article.title }}</li>
+    {% endfor %}
+</ul>
+<!-- endblock: 内容の後尾に配置する -->
+{% endblock %}

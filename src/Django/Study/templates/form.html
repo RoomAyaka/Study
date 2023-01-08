@@ -1,0 +1,8 @@
+<h2>新規記事</h2>
+<form action="" method="POST">
+    <!-- csrf_token: トークンを発行し、サーバー側が本人からの操作か確認する -->
+    {% csrf_token %}
+    <!-- form.as_p: タイトルと本文のフォームを表示 -->
+    {{ form.as_p }}
+    <button type="submit">投稿</button>
+</form>
